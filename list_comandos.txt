@@ -1,1 +1,2 @@
 criar venv = python3 -m venv 'nome da venv'
+django-admin startproject 'nomeprojeto' .
