@@ -1,2 +1,4 @@
 criar venv = python3 -m venv 'nome da venv'
 django-admin startproject 'nomeprojeto' .
+fazer o requirimests = pip freeze > requirements.txt
+pra instalar o requirements =  pip install -r requirements.txt
