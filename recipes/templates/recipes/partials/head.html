@@ -104,5 +104,53 @@
             margin: 0 auto;
             gap: 2rem;
         }
+
+        .search-form {
+            border: 0.2rem solid var(--color-primary-dark);
+            max-width: 64rem;
+            margin: 0 auto;
+            border-radius: 5px;
+            position: relative;
+            transition: 0.3s ease-in-out;
+        }
+
+        .search-input,
+        .search-button {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 1rem;
+            transition: 0.3s ease-in-out;
+
+        }
+
+        .search-input {
+            width: 100%;
+            padding-right: 3rem;
+        }
+
+        .search-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .search-button:focus {
+            outline: 2px solid var((var(--color-primary)));
+            background: rgba(0, 0, 0, .05);
+        }
+
+        .search-form:focus-within {
+            border-color: var(--color-primary);
+            background: var(--color-white);
+            transition: 0.3s ease-in-out;
+
+        }
+
+        .search-form:focus-within .search-button {
+            color: var(--color-primary);
+            transition: 0.3s ease-in-out;
+
+        }
     </style>
 </head>
