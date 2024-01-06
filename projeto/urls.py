@@ -14,15 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.http import HttpResponse
-
-# HTTP REQUEST
-def my_view(request):
-    return HttpResponse('Home')
-    # return HTTP Response
+from django.urls import path , include
+from recipes.views import home ,sobre, _contato
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', my_view),
+    path('', include('recipes.urls')),
+    #basicamente incluiu essas urls na home 
+    path('recipes/', include('recipes.urls')),
+    #nesse caso incluiu essas urls dps da rota recipes
 ]
