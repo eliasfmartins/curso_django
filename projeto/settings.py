@@ -58,6 +58,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR/'base_templates'],
+        #aqui fica todos os caminhos a qual ele vai procurar templates
+        # no caso nesse caminho ele vai achar o caminho.home e etc...
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -10,8 +10,3 @@ def home(request):
     } )
     # return HTTP Response
 # Create your views here.
-def _contato(request):
-    return HttpResponse('Contato')
-
-def sobre(response):
-    return HttpResponse('Sobre')
