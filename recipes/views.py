@@ -6,5 +6,11 @@ def home(request):
     return render(request, 'recipes/pages/home.html', context={
         'name':'Elias the Fodao'
     } )
-    # return HTTP Response
+    
+# return HTTP Response
 # Create your views here.
+def recipe(request, id):
+    return render(request, 'recipes/pages/home.html', context={
+        'name':'Elias the Fodao'
+    } )
+
