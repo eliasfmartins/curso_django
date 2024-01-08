@@ -10,7 +10,7 @@ def home(request):
 # return HTTP Response
 # Create your views here.
 def recipe(request, id):
-    return render(request, 'recipes/pages/home.html', context={
+    return render(request, 'recipes/pages/recipe-view.html', context={
         'name':'Elias the Fodao'
     } )
 
