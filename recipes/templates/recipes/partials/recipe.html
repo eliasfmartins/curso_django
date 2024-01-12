@@ -1,52 +1,53 @@
-<div class="recipes:recipe recipes:recipe-list-item">
-    <div class="recipes:recipe-cover">
-        <a href="{% url  "recipes-recipes:recipe"  recipes:recipe.id %}">
-            <img src="{{recipes:recipe.cover.url}}" alt="temporario">
+<div class="recipe recipe-list-item">
+    <div class="recipe-cover">
+        <a href="{% url  "recipes:recipe" recipe.id %}">
+            <img src="{{recipe.cover.url}}" alt="temporario">
         </a>
     </div>
-    <div class="recipes:recipe-title-container">
-        <h2 class="recipes:recipe-title">
-            <a href="{% url  "recipes-recipes:recipe"  recipes:recipe.id %}">
-                {{recipes:recipe.title}}
+    <div class="recipe-title-container">
+        <h2 class="recipe-title">
+            <a href="{% url  "recipes:recipe" recipe.id %}">
+                {{recipe.title}}
             </a>
         </h2>
     </div>
-    <div class="recipes:recipe-author">
-        <span class="recipes:recipe-author-item">
+    <div class="recipe-author">
+        <span class="recipe-author-item">
             <i class="fas fa-user"></i>
-            {{recipes:recipe.author.first_name}} {{recipes:recipe.author.last_name}}
+            {{recipe.author.first_name}} {{recipe.author.last_name}}
         </span>
-        <span class="recipes:recipe-author-item">
+        <span class="recipe-author-item">
             <i class="fas fa-calendar-alt"></i>
-            {{ recipes:recipe.created_at |date:"d/m/Y "}} ás {{ recipes:recipe.created_at |date:"H:i"}}
+            {{recipe.created_at |date:"d/m/Y "}} ás {{recipe.created_at |date:"H:i"}}
         </span>
-        <span class="recipes:recipe-author-item">
+        <span class="recipe-author-item">
             <a href="/recipes/category/cafe-da-manha/">
                 <i class="fas fa-layer-group"></i>
-                <span>{{recipes:recipe.category.name}}</span>
+                <span>{{recipe.category.name}}</span>
             </a>
         </span>
     </div>
-    <div class="recipes:recipe-content">
-        <p>{{recipes:recipe.description}}</p>
+    <div class="recipe-content">
+        <p>{{recipe.description}}</p>
     </div>
-    <div class="recipes:recipe-meta-container">
-        <div class="recipes:recipe-meta recipes:recipe-preparation">
-            <h3 class="recipes:recipe-meta-title"><i class="fas fa-stopwatch"></i> Preparo</h3>
-            <div class="recipes:recipe-meta-text">
-                {{recipes:recipe.preparation_time}} {{recipes:recipe.preparation_time_unit}}
+    <div class="recipe-meta-container">
+        <div class="recipe-meta recipe-preparation">
+            <h3 class="recipe-meta-title"><i class="fas fa-stopwatch"></i> Preparo</h3>
+            <div class="recipe-meta-text">
+                {{recipe.preparation_time}} {{recipe.preparation_time_unit}}
             </div>
         </div>
-        <div class="recipes:recipe-meta recipes:recipe-servings">
-            <h3 class="recipes:recipe-meta-title"><i class="fas fa-pizza-slice"></i> Porções</h3>
-            <div class="recipes:recipe-meta-text">
-                {{recipes:recipe.servings}} {{recipes:recipe.preparation_unit}}
+        <div class="recipe-meta recipe-servings">
+            <h3 class="recipe-meta-title"><i class="fas fa-pizza-slice"></i> Porções</h3>
+            <div class="recipe-meta-text">
+                {{recipe.servings}} {{recipe.preparation_unit}}
             </div>
         </div>
     </div>
     {% if is_detail_page is not True %}
-    <footer class="recipes:recipe-footer">
-        <a class="recipes:recipe-read-more button button-dark button-full-width" href="{% url "recipes-recipes:recipe" recipes:recipe.id %}">
+    <footer class="recipe-footer">
+        <a class="recipe-read-more button button-dark button-full-width" href="{% url " recipes-recipe"
+            recipe.id %}">
             <i class="fas fa-eye"></i>
             <span>ver mais...</span>
         </a>
@@ -54,7 +55,7 @@
     {% endif %}
     {% if is_detail_page is True %}
     <div class="preparation-steps">
-        {{recipes:recipe.preparation_steps| linebreaksbr}}
+        {{recipe.preparation_steps| linebreaksbr}}
     </div>
     {% endif %}
 
