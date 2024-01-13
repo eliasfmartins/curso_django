@@ -17,6 +17,8 @@ class  Recipe(models.Model):
     #campo do tipo string com no max 65 caracteres
     description = models.CharField(max_length=165)
     slug = models.SlugField()
+    preparation_time =models.IntegerField(default=0)
+    preparation_time_unit =models.CharField(default='',max_length=50)
     servings = models.IntegerField()
     servings_unit = models.CharField(max_length=200)
     preparation_steps = models.TextField()
@@ -27,5 +29,8 @@ class  Recipe(models.Model):
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
     category = models.ForeignKey(Category, on_delete =models.SET_NULL, null=True )
     author = models.ForeignKey(User, on_delete =models.SET_NULL, null=True )
+    
+    def __str__(self):
+        return self.title
     #quando deletar category vai settar o campo para null o null por padrao nao e aceito
     # esse null = True quer dizer  q aceita o campo receber valor Null
