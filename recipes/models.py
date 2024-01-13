@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=65)
    
+    def __str__ (self):
+       return self.name
+   #faz aparecer o nome ao invez de obj(id)
 
 
 class  Recipe(models.Model):
