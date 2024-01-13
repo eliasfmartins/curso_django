@@ -1,6 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 #tabela no banco de dados
+
 # Create your models here.
+
+class Category(models.Model):
+    name = models.CharField(max_length=65)
+   
+
 
 class  Recipe(models.Model):
     title = models.CharField(max_length=65)
@@ -15,3 +22,7 @@ class  Recipe(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
+    category = models.ForeignKey(Category, on_delete =models.SET_NULL, null=True )
+    author = models.ForeignKey(User, on_delete =models.SET_NULL, null=True )
+    #quando deletar category vai settar o campo para null o null por padrao nao e aceito
+    # esse null = True quer dizer  q aceita o campo receber valor Null
