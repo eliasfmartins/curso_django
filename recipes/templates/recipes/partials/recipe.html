@@ -1,8 +1,10 @@
 <div class="recipe recipe-list-item">
+    {% if recipe.cover %}
     <div class="recipe-cover">
         <a href="{% url  "recipes:recipe" recipe.id %}">
             <img src="{{recipe.cover.url}}" alt="temporario">
         </a>
+        {% endif %}
     </div>
     <div class="recipe-title-container">
         <h2 class="recipe-title">
@@ -14,14 +16,19 @@
     <div class="recipe-author">
         <span class="recipe-author-item">
             <i class="fas fa-user"></i>
-            {{recipe.author.first_name}} {{recipe.author.last_name}}
+            {% if recipe.author.first_name %}
+            {{recipe.author.first_name}} 
+            {{recipe.author.last_name}}
+            {% else %}
+            {{recipe.author.username}}
+            {% endif %}
         </span>
         <span class="recipe-author-item">
             <i class="fas fa-calendar-alt"></i>
             {{recipe.created_at |date:"d/m/Y "}} ás {{recipe.created_at |date:"H:i"}}
         </span>
         <span class="recipe-author-item">
-            <a href="/recipes/category/cafe-da-manha/">
+            <a href="{% url "recipes:category" recipe.category.id %}">
                 <i class="fas fa-layer-group"></i>
                 <span>{{recipe.category.name}}</span>
             </a>
@@ -45,12 +52,12 @@
         </div>
     </div>
     {% if is_detail_page is not True %}
-    <footer class="recipe-footer">
-        <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:recipe' recipe.id %}">
-            <i class="fas fa-eye"></i>
-            <span>ver mais...</span>
-        </a>
-    </footer>
+        <footer class="recipe-footer">
+            <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:recipe' recipe.id %}">
+                <i class="fas fa-eye"></i>
+                <span>ver mais...</span>
+            </a>
+        </footer>
     {% endif %}
     {% if is_detail_page is True %}
     <div class="preparation-steps">
