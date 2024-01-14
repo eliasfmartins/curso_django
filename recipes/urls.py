@@ -6,6 +6,7 @@ app_name ='recipes'
 
 urlpatterns = [
     path('', views.home, name='home') ,
+    path('recipes/category/<int:category_id>/', views.category, name='category' ),
     path('recipes/<int:id>/', views.recipe, name='recipe' ),
 ]
 # usa se <nome param> para pegar o valor dinamico
