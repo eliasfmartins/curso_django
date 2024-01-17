@@ -12,3 +12,4 @@ urlpatterns = [
 # usa se <nome param> para pegar o valor dinamico
 #dentro do < passar o tipo de propriedade vai ser aceito como parametro no meu caso <int:>
 # tem varios tipos na documentação
+#
