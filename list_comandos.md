@@ -27,3 +27,40 @@ no caso usei  o HttpResponse('retorna uma string aqui') lenbrando que isso e um 
 para enviar uma resposta http
 
 o app e o coracao da aplicação e praticamente uma pasta onde vc coloca as suas urls da aplicação view templates a e demais coisas
+
+## app com DJango
+
+criando app no django utiliza -se python manage.py startapp 'name do app'
+
+init.py so serve pra indicar ao python q a pasta e um pacote
+
+apps.py tem o nome do seu app e caminho de banco de dados 
+
+models sao as tabelas do banco de dados
+
+views e  o arquivo onde voce criar asuas views
+
+ao fazer as importacoes no django sempre usar o caminho completo
+
+ex: ao invez de view colocar o nome do app from recipes.views import Home
+
+tbm e importante separar as urls no caso dentro da pasta do app crie um novo arquivo urls.py
+
+o arquivo geralmente sera assim
+
+
+from django.urls import path, include# esse include e pra incluir
+
+
+
+urlpatterns = [
+
+path('', include('nome do app.urls))
+
+vai incluir as urls de dentro de urls do app
+
+dentro da string vazia vai virar o caminho no caso vai passar a url de dentro diretamente a partir
+
+da '/' rais do site se eu colocasse 'pao' seria pao/urls e etc...
+
+]
