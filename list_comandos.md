@@ -66,3 +66,47 @@ dentro da string vazia vai virar o caminho no caso vai passar a url de dentro di
 da '/' rais do site se eu colocasse 'pao' seria pao/urls e etc...
 
 ]
+
+## Templates
+
+o HttpREsponse era utilizado apenas pra fins de teste e renderizar texto
+
+importa se o render
+
+from django.shortcuts impoort render
+
+o methodo render renderiza um template
+
+ex: def home(request):
+
+    return render(request, 'caminho/template.html)
+
+em resumo vc passa a requisicao e o caminho do template
+
+por convenção dentro do seu app vc cria uma pasta chamada template
+
+### E preciso ir em configurações do projeto 
+
+alterar configuracoes pra buscar informacoes dentro do app
+
+caso o contrario ele n ira buscar o template dentro do seu app
+
+em settings.py do projeto procurar INSTALLED_APPS
+
+colocar o nome do seu app la dentro pra ele tomar ciencia da existencia do mesmo
+
+no mesmo arquivo de configuracoes em TEMPLATES
+
+na chave DIRS voce pode colocar os caminhos onde os templates serao buscados
+
+o BASE_DIR pega o caminho da raiz do projeto  da rais voce coloca o caminho q ele 
+
+deve procurar os templates o problema ocorre quando tem 2 arquivos com o mesmo
+
+nome por isso e tbm uma convencao colocar dentro da pasta templates 
+
+uma pasta com nome do app/nome_template.html
+
+sempre q colocar o caminho da url com nome do app para nao haver colisao de nomes
+
+pois o django pega o primeiro q ele achar
