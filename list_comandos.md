@@ -44,6 +44,8 @@ ao fazer as importacoes no django sempre usar o caminho completo
 
 ex: ao invez de view colocar o nome do app from recipes.views import Home
 
+## Urls rotas
+
 tbm e importante separar as urls no caso dentro da pasta do app crie um novo arquivo urls.py
 
 o arquivo geralmente sera assim
