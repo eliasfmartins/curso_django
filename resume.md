@@ -64,3 +64,9 @@ TEMPLATES = [
     },
 ]
 ```
+
+## Contexto
+
+* e possivel passar dados para dentro do template  utilizando context={dados}
+* render(request, 'caminho/template', context={ 'teste':'respostadoteste})
+* pra usar no template usa se{{teste}}
