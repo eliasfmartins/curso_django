@@ -65,8 +65,13 @@ TEMPLATES = [
 ]
 ```
 
+
 ## Contexto
 
-* e possivel passar dados para dentro do template  utilizando context={dados}
-* render(request, 'caminho/template', context={ 'teste':'respostadoteste})
-* pra usar no template usa se{{teste}}
+- É possível passar dados para dentro do template utilizando `context={dados}`.
+- Exemplo de uso em `views.py`:
+  ```python
+  render(request, 'caminho/template', context={'teste': 'respostadoteste'})
+  ```
+
+* No template, utilize `{{teste}}` para acessar os dados passados.
