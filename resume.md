@@ -65,7 +65,6 @@ TEMPLATES = [
 ]
 ```
 
-
 ## Contexto
 
 - É possível passar dados para dentro do template utilizando `context={dados}`.
@@ -75,3 +74,55 @@ TEMPLATES = [
   ```
 
 * No template, utilize `{{teste}}` para acessar os dados passados.
+
+# Organização de Componentes no Django
+
+Ao trabalhar com Django, é uma prática comum separar os componentes em diferentes diretórios para facilitar a organização e manutenção do código. Aqui estão algumas convenções sugeridas:
+
+## Estrutura de Pastas
+
+- **Partials:** Utilizada para armazenar componentes reutilizáveis.
+- **Pages:** Destinada a conter os componentes específicos de cada página.
+
+## Criando Componentes
+
+**Partials:**
+
+- Por convenção, crie uma pasta chamada `partials`.
+- Dentro dessa pasta, organize os componentes de acordo com sua funcionalidade.
+
+Exemplo:
+
+/recipes
+
+/partials
+
+- head.html
+- navbar.html
+- footer.html
+
+
+**Pages:**
+
+- Crie uma pasta chamada `pages` para armazenar os componentes específicos de cada página.
+
+Exemplo:
+
+/recipes
+/pages
+
+- home.html
+- about.html
+- contact.html
+
+## Incluindo Componentes nas Páginas
+
+Para incluir componentes em suas páginas, utilize a tag `{% include %}`.
+
+Exemplo de uso em um arquivo de template:
+
+```
+{% include 'recipes/partials/head.html' %}
+```
+
+Certifique-se de fornecer o caminho correto para o componente desejado. Essa abordagem facilita a manutenção e reutilização de componentes em diferentes partes do projeto.
