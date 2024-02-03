@@ -101,7 +101,6 @@ Exemplo:
 - navbar.html
 - footer.html
 
-
 **Pages:**
 
 - Crie uma pasta chamada `pages` para armazenar os componentes específicos de cada página.
@@ -126,3 +125,14 @@ Exemplo de uso em um arquivo de template:
 ```
 
 Certifique-se de fornecer o caminho correto para o componente desejado. Essa abordagem facilita a manutenção e reutilização de componentes em diferentes partes do projeto.
+
+
+## Arquivos estaticos
+
+primeiro passo separe seu arquivo css ou javascript ou imagem
+
+o servidor do django ja vem configurado para ler arquivos estaticos dentro da pasta do app por
+
+padrao ele busca dentro da pasta static dentro da pasta static cria a mesma pasta com nome do app pra evitar colisao de nomes e dentro dessa pasta crio uma pasta pra alocar o css 
+
+e necessario configurar a settings q ficam dentro do projeto
