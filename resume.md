@@ -180,6 +180,50 @@ Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django faci
 
    <link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">
 
-   static files dir  e sobre um arquivo estatico que nao esta atrelado a nenhum app geralmente usa se uma basta chamada base_static usando namespace colocando uma pasta global dentro dela para nao causar colisoes de nome e dentro da mesma uma pasta css para armazenar o conteudo css estatico importante na hora de fazer o uso desse global quando for linkar o css e preciso colocar o caminho correto nesse caso seria static `"{% static 'global/css/styles.css' %}`
+   ## Configuração de Diretórios para Arquivos Estáticos
 
-   po padrao o django nao pesquisa esses static files vc precisa configurar los no settings do app  criar uma chave STATICFILES_DIRS = [ BASE_DIR / 'base_static'] basicamente faz com que o django procure os arquivos estaticos nesses lugares
+   Ao lidar com arquivos estáticos que não estão diretamente atrelados a nenhum aplicativo específico, é comum criar uma pasta global para evitar conflitos de nome. Vamos chamar essa pasta de `base_static`.
+
+   ### Estrutura Padrão
+
+
+   1. **Criando a Estrutura:**
+
+      - Crie uma pasta chamada `base_static`.
+      - Dentro dela, organize os arquivos estáticos, por exemplo, em uma subpasta `css`.
+
+      Exemplo:
+   2. /base_static
+      /css
+
+   - styles.css
+
+   ### Configuração no Settings
+
+   1. **Configurando o Settings.py:**
+
+   - Adicione a chave `STATICFILES_DIRS` em `settings.py` para indicar ao Django onde procurar esses arquivos estáticos globais.
+
+   Exemplo:
+
+   ```python
+   STATICFILES_DIRS = [BASE_DIR / 'base_static']
+   ```
+   ### Utilizando Arquivos Estáticos Globais nos Templates
+
+   1. **Linkando o CSS:**
+
+      * Ao linkar um arquivo CSS global, certifique-se de usar o caminho correto. Utilize a tag `{% static %}` da seguinte maneira:
+      * 
+
+      <link rel="stylesheet" href="{% static 'global/css/styles.css' %}">
+
+      **Namespace:**
+
+      * É útil adicionar um namespace para evitar conflitos. Isso significa que, ao usar um arquivo estático global, o prefixo `global/` é recomendado para garantir um caminho único.
+
+      Exemplo:
+   2. <link rel="stylesheet" href="{% static 'global/css/styles.css' %}">
+
+   Ao seguir essas práticas, o Django procurará arquivos estáticos nos diretórios configurados em `STATICFILES_DIRS`, permitindo o uso de arquivos estáticos globais em sua aplicação.
+   2.
