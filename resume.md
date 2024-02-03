@@ -135,4 +135,17 @@ o servidor do django ja vem configurado para ler arquivos estaticos dentro da pa
 
 padrao ele busca dentro da pasta static dentro da pasta static cria a mesma pasta com nome do app pra evitar colisao de nomes e dentro dessa pasta crio uma pasta pra alocar o css 
 
-e necessario configurar a settings q ficam dentro do projeto
+e necessario configurar a settings q ficam dentro do projeto em instaled app e preciso ter  'django.contrib.staticfiles', pra indicar pra ele buscar por aquivos estaticos geralmente ja vem por padrao
+
+no arquivo que e necessario inportar o css ou arquivo desejado vc cria um link para static files
+
+no topo do arquivo usa se uma tag {%load static%} pra indicar que ele deve carregart arquivos estaticos
+
+exp de como ficaria o link for css
+
+```javascript
+
+<Link rel = 'stylesheet' href="{% static 'recipes/css/styles.css %}" ><>
+```
+
+a mesma coisa usa se o caminho para o arquivo depois da pasta static
