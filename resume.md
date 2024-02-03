@@ -209,6 +209,7 @@ Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django faci
    ```python
    STATICFILES_DIRS = [BASE_DIR / 'base_static']
    ```
+
    ### Utilizando Arquivos Estáticos Globais nos Templates
 
    1. **Linkando o CSS:**
@@ -226,4 +227,15 @@ Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django faci
    2. <link rel="stylesheet" href="{% static 'global/css/styles.css' %}">
 
    Ao seguir essas práticas, o Django procurará arquivos estáticos nos diretórios configurados em `STATICFILES_DIRS`, permitindo o uso de arquivos estáticos globais em sua aplicação.
-   2.
+   2. pra coletar todos os arquivos estaticos da aplicação usa se o comando
+3. ```python
+   python manage.py collectstatic
+   ```
+
+para esse comando funcionar e necessario configurar o staticroot
+
+em settings do app cria se um STATIC_ROOT =  BASE_DIR / 'static'
+
+basicamente eu estou falando pro django onde ele deve salvar todos os arquivos estaticos coletados
+
+quando executar o comando python manage.py collectstatic os arquivos seram reunidos nessa pasta  mostra a importancia do name space quando os arquivos sao coletados ele subistitui arquivos com mesmo nome
