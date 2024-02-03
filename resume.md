@@ -1,3 +1,9 @@
+
+`href="{% static 'recipes/css/styles.css' %}`
+
+
+`href="{% static 'recipes/css/styles.css' %}`
+
 # Configuração do Ambiente Virtual
 
 - Criar a venv: `python3 -m venv 'nome da venv'`
@@ -126,7 +132,6 @@ Exemplo de uso em um arquivo de template:
 
 Certifique-se de fornecer o caminho correto para o componente desejado. Essa abordagem facilita a manutenção e reutilização de componentes em diferentes partes do projeto.
 
-
 ## Arquivos Estáticos
 
 Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django facilita o processo de configuração e utilização.
@@ -162,7 +167,6 @@ Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django faci
    ]
    ```
 
-
 ### Utilizando Arquivos Estáticos nos Templates
 
 1. **Importando na Página:**
@@ -175,3 +179,7 @@ Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django faci
    * Certifique-se de incluir o caminho a partir da pasta `static`.
 
    <link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">
+
+   static files dir  e sobre um arquivo estatico que nao esta atrelado a nenhum app geralmente usa se uma basta chamada base_static usando namespace colocando uma pasta global dentro dela para nao causar colisoes de nome e dentro da mesma uma pasta css para armazenar o conteudo css estatico importante na hora de fazer o uso desse global quando for linkar o css e preciso colocar o caminho correto nesse caso seria static `"{% static 'global/css/styles.css' %}`
+
+   po padrao o django nao pesquisa esses static files vc precisa configurar los no settings do app  criar uma chave STATICFILES_DIRS = [ BASE_DIR / 'base_static'] basicamente faz com que o django procure os arquivos estaticos nesses lugares
