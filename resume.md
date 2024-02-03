@@ -227,15 +227,33 @@ Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django faci
    2. <link rel="stylesheet" href="{% static 'global/css/styles.css' %}">
 
    Ao seguir essas práticas, o Django procurará arquivos estáticos nos diretórios configurados em `STATICFILES_DIRS`, permitindo o uso de arquivos estáticos globais em sua aplicação.
-   2. pra coletar todos os arquivos estaticos da aplicação usa se o comando
-3. ```python
-   python manage.py collectstatic
-   ```
 
-para esse comando funcionar e necessario configurar o staticroot
+    
 
-em settings do app cria se um STATIC_ROOT =  BASE_DIR / 'static'
+## Coletando Arquivos Estáticos da Aplicação
 
-basicamente eu estou falando pro django onde ele deve salvar todos os arquivos estaticos coletados
+Para reunir todos os arquivos estáticos de sua aplicação, utilize o comando:
 
-quando executar o comando python manage.py collectstatic os arquivos seram reunidos nessa pasta  mostra a importancia do name space quando os arquivos sao coletados ele subistitui arquivos com mesmo nome
+```bash
+python manage.py collectstatic
+```
+
+
+### Configuração do `STATIC_ROOT`
+
+1. **Configuração no `settings.py`:**
+
+   * Antes de executar o comando `collectstatic`, é necessário configurar o `STATIC_ROOT` no arquivo `settings.py` do aplicativo.
+
+   Exemplo:
+2. STATIC_ROOT = BASE_DIR / 'static'
+3. Essa configuração informa ao Django onde salvará todos os arquivos estáticos coletados
+4.  ### Importância do Namespace
+
+
+   1. **Evitando Conflitos:**
+      * O uso de namespaces, como mencionado anteriormente (`global/`), é crucial ao coletar arquivos estáticos.
+      * Quando você executa o comando `python manage.py collectstatic`, ele reúne todos os arquivos estáticos de todas as aplicações e os coloca na pasta configurada em `STATIC_ROOT`.
+      * O namespace garante que arquivos com o mesmo nome, mas provenientes de diferentes aplicativos, não entrem em conflito.
+
+   Ao seguir essas etapas, você pode garantir uma coleta adequada de todos os arquivos estáticos de sua aplicação, evitando conflitos e mantendo a organização.
