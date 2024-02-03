@@ -127,25 +127,51 @@ Exemplo de uso em um arquivo de template:
 Certifique-se de fornecer o caminho correto para o componente desejado. Essa abordagem facilita a manutenção e reutilização de componentes em diferentes partes do projeto.
 
 
-## Arquivos estaticos
+## Arquivos Estáticos
 
-primeiro passo separe seu arquivo css ou javascript ou imagem
+Ao lidar com arquivos estáticos, como CSS, JavaScript ou imagens, o Django facilita o processo de configuração e utilização.
 
-o servidor do django ja vem configurado para ler arquivos estaticos dentro da pasta do app por
+### Configuração Inicial
 
-padrao ele busca dentro da pasta static dentro da pasta static cria a mesma pasta com nome do app pra evitar colisao de nomes e dentro dessa pasta crio uma pasta pra alocar o css 
+1. **Separe os Arquivos:**
 
-e necessario configurar a settings q ficam dentro do projeto em instaled app e preciso ter  'django.contrib.staticfiles', pra indicar pra ele buscar por aquivos estaticos geralmente ja vem por padrao
+   - Separe seus arquivos CSS, JavaScript ou imagens em uma pasta específica.
+2. **Configuração Padrão do Django:**
 
-no arquivo que e necessario inportar o css ou arquivo desejado vc cria um link para static files
+   - O servidor do Django já está configurado para ler arquivos estáticos dentro da pasta do aplicativo.
+   - Por padrão, ele busca na pasta `static`. Dentro dessa pasta, é uma prática criar uma subpasta com o nome do aplicativo para evitar colisões de nomes.
+   - Exemplo:
+     ```
+     /recipes
+         /static
+             /recipes
+                 /css
+                     - styles.css
+     ```
+3. **Configuração no Settings:**
 
-no topo do arquivo usa se uma tag {%load static%} pra indicar que ele deve carregart arquivos estaticos
+   - No arquivo `settings.py` do projeto, verifique se `'django.contrib.staticfiles'` está presente em `INSTALLED_APPS`.
+   - Isso indica ao Django para buscar arquivos estáticos.
 
-exp de como ficaria o link for css
+   Exemplo:
 
-```javascript
+   ```python
+   INSTALLED_APPS = [
+       # ...
+       'django.contrib.staticfiles',
+   ]
+   ```
 
-<Link rel = 'stylesheet' href="{% static 'recipes/css/styles.css %}" ><>
-```
 
-a mesma coisa usa se o caminho para o arquivo depois da pasta static
+### Utilizando Arquivos Estáticos nos Templates
+
+1. **Importando na Página:**
+
+   * No arquivo onde deseja importar o CSS ou outro arquivo estático, use a tag `{% load static %}` no topo para indicar que os arquivos estáticos devem ser carregados.
+2. **Exemplo de Uso:**
+
+   * Para criar um link para um arquivo CSS, use o seguinte formato:
+   * `<link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">`
+   * Certifique-se de incluir o caminho a partir da pasta `static`.
+
+   <link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">
