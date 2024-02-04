@@ -363,6 +363,24 @@ O base template contém a estrutura geral do site, incluindo o cabeçalho e o ro
 Dessa forma, o conteúdo dentro do bloco `{% block content %}` no componente page substituirá o conteúdo correspondente no base template. Isso mantém a estrutura organizada e evita repetições desnecessárias.
 
 
-<link rel="stylesheet" href="{% static 'global/css/styles.css' %}"/>
+Claro! Vamos ajustar o seu resumo e melhorar o que for possível:
 
-<link rel="stylesheet" href="{% static 'global/css/styles.css' %}"/>
+## Título Dinâmico em Templates do Django
+
+Para criar um título dinâmico nos templates do Django, siga estas etapas:
+
+1. **Configuração Inicial:**
+   * No arquivo `base.html`, adicione as seguintes linhas no início do documento:
+     ```html
+     <!DOCTYPE html>
+     <html lang="pt-BR">
+     ```
+   * Em seguida, inclua o conteúdo do arquivo `head.html` usando a tag `{% include 'head.html' %}`. Isso garantirá que os links de CSS, fontes e outros recursos sejam carregados corretamente.
+2. **Título Dinâmico:**
+   * Dentro da tag `<head>`, adicione uma tag `<title>` e defina o valor como um bloco. Por exemplo:
+     ```html
+     <title>{% block title %}Título Padrão{% endblock title %}</title>
+     ```
+   * Certifique-se de que o bloco `title` esteja definido nos templates específicos (como `index.html` ou outras páginas).
+
+Dessa forma, você pode criar títulos dinâmicos para suas páginas usando blocos no Django. Lembre-se de substituir o valor padrão pelo título específico de cada página. 😊
