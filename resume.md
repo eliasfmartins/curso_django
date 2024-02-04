@@ -254,15 +254,67 @@ Ao lidar com arquivos estáticos que não estão diretamente atrelados a nenhum 
 ### Importância do Namespace
 
 * **Evitando Conflitos:**
+
   * O uso de namespaces, como mencionado anteriormente (`global/`), é crucial ao coletar arquivos estáticos.
   * Quando você executa o comando `python manage.py collectstatic`, ele reúne todos os arquivos estáticos de todas as aplicações e os coloca na pasta configurada em `STATIC_ROOT`.
   * O namespace garante que arquivos com o mesmo nome, mas provenientes de diferentes aplicativos, não entrem em conflito.
 
-   Ao seguir essas etapas, você pode garantir uma coleta adequada de todos os arquivos estáticos de sua aplicação, evitando conflitos e mantendo a organização. 😊
+  Ao seguir essas etapas, você pode garantir uma coleta adequada de todos os arquivos estáticos de sua aplicação, evitando conflitos e mantendo a organização. 😊
 
-<link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}"/>
+# URLs Dinâmicas com Django
+
+Quando trabalhamos com URLs em um projeto Django, é importante entender como configurá-las corretamente para que a aplicação possa rotear as solicitações do usuário para as views apropriadas. Vamos abordar alguns conceitos essenciais relacionados a URLs dinâmicas.
+
+## Importando Views
+
+Em vez de importar uma view de cada vez, podemos importar toda uma pasta. Por exemplo, suponha que temos uma pasta chamada “recipes” com um arquivo de views. Podemos fazer o seguinte importe:
+
+```python
+from recipes import views
+```
+
+Isso significa que estamos importando o arquivo “views.py” da pasta “recipes”. Lembre-se de que, em vez de usar a função diretamente, devemos referenciar a view como `views.nome_da_funcao`.
+
+## Configurando uma Nova URL
+
+Ao criar uma nova URL, precisamos configurar uma view para determinar o que será exibido na rota específica. Por exemplo, suponha que queremos criar uma rota chamada “/receita/”.
+
+Primeiro, criamos a view correspondente:
+
+```python
+def recipe(request):
+    return render(request, 'nomedotemplate.html', context={'teste': 'teste'})
+```
+
+Agora podemos implementar a nova URL no arquivo `urls.py`:
+
+```python
+urlpatterns = [
+    path('', views.home),
+    path('receita/', views.recipe),
+]
+```
+
+## Parâmetros em URLs Dinâmicas
+
+Quando lidamos com URLs dinâmicas, muitas vezes precisamos receber parâmetros na URL e passá-los para a view. Por exemplo, podemos criar uma URL que espera um parâmetro chamado “id”:
+
+```python
+path('receita/<int:id>/', views.recipe)
+```
+
+Nesse exemplo, o valor do parâmetro “id” será extraído diretamente da URL e passado para a view. É importante que a view declare esse parâmetro para acessar o valor:
+
+```python
+def recipe(request, id):
+    # Faça algo com o valor de "id"
+    return render(request, 'nomedotemplate.html', context={'teste': 'teste'})
+```
+
+Além do tipo “int”, existem outros tipos de parâmetros, como “slug”, “uuid” e outros, que podem ser usados conforme necessário.
+
+
 
 <link rel="stylesheet" href="{% static 'global/css/styles.css' %}"/>
-
 
 <link rel="stylesheet" href="{% static 'global/css/styles.css' %}"/>
