@@ -313,6 +313,54 @@ def recipe(request, id):
 
 Além do tipo “int”, existem outros tipos de parâmetros, como “slug”, “uuid” e outros, que podem ser usados conforme necessário.
 
+# Blocos em Templates do Django
+
+Ao trabalhar com templates no Django, é importante evitar a repetição de código e manter uma estrutura organizada. Uma maneira de fazer isso é usando um  **base template** , que carrega o HTML comum a todas as páginas e permite substituir apenas o conteúdo específico de cada página.
+
+## Base Template
+
+O base template contém a estrutura geral do site, incluindo o cabeçalho e o rodapé. O “miolo” da página, que varia entre as diferentes páginas, será substituído. Para isso, utilizamos a tag `{% block content %} {% endblock content %}`.
+
+## Como Funciona
+
+1. **Crie um Base Template** : Crie um arquivo de template que servirá como base para todas as páginas. Nesse arquivo, defina os elementos comuns a todas as páginas, como o cabeçalho e o rodapé.
+2. **Defina Blocos no Base Template** : Dentro do base template, utilize a tag `{% block content %}` para indicar onde o conteúdo específico de cada página será inserido. Por exemplo:
+
+```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <!-- Meta tags, CSS, etc. -->
+   </head>
+   <body>
+       <header>
+           <!-- Cabeçalho comum a todas as páginas -->
+       </header>
+       <div class="content">
+           {% block content %}
+           <!-- Conteúdo específico da página -->
+           {% endblock content %}
+       </div>
+       <footer>
+           <!-- Rodapé comum a todas as páginas -->
+       </footer>
+   </body>
+   </html>
+```
+
+1. **Páginas Específicas (Componente Page)** : Crie arquivos de template para cada página específica. Esses arquivos herdarão do base template e conterão apenas o conteúdo único de cada página. Por exemplo:
+
+```html
+   {% extends 'global/base.html' %}
+
+   {% block content %}
+       <!-- Conteúdo específico da página -->
+       <h1>Minha Página</h1>
+       <p>Texto da página...</p>
+   {% endblock content %}
+```
+
+Dessa forma, o conteúdo dentro do bloco `{% block content %}` no componente page substituirá o conteúdo correspondente no base template. Isso mantém a estrutura organizada e evita repetições desnecessárias.
 
 
 <link rel="stylesheet" href="{% static 'global/css/styles.css' %}"/>
