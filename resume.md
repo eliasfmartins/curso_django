@@ -362,7 +362,6 @@ O base template contém a estrutura geral do site, incluindo o cabeçalho e o ro
 
 Dessa forma, o conteúdo dentro do bloco `{% block content %}` no componente page substituirá o conteúdo correspondente no base template. Isso mantém a estrutura organizada e evita repetições desnecessárias.
 
-
 Claro! Vamos ajustar o seu resumo e melhorar o que for possível:
 
 ## Título Dinâmico em Templates do Django
@@ -384,3 +383,13 @@ Para criar um título dinâmico nos templates do Django, siga estas etapas:
    * Certifique-se de que o bloco `title` esteja definido nos templates específicos (como `index.html` ou outras páginas).
 
 Dessa forma, você pode criar títulos dinâmicos para suas páginas usando blocos no Django. Lembre-se de substituir o valor padrão pelo título específico de cada página. 😊
+
+e possivel gerar uma funcao com a biblioteca faker para retorna um dicionario com dados ficticios e executar essa funcao pra usar como contexto e popular cards no caso de receitas 
+
+e na view que renderiza o template passar como contexto exemplo
+
+def home(request):
+
+    return render(request, 'tempate/template.html', context{ ' exemplo':[nome_funcao() for_ in  range(10)})
+
+basicamente vai executar a funcao 10x e gerar obj
