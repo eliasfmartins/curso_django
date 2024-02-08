@@ -439,41 +439,53 @@ Na sua template (`template.html`), você pode iterar sobre os exemplos usando o 
 
 Dessa forma, sua view renderizará o template com 10 exemplos de dados fictícios, que você pode usar para popular os cards no seu projeto Django. Lembre-se de adaptar os campos e as chaves do dicionário conforme necessário para o seu caso específico. 🚀
 
-## Url dinamicas
 
-para usar url dinamicas e preciso colocar primeiramente names  nas urls ex:
+## URLs Dinâmicas no Django
 
-urlpatterns = [
+Para utilizar URLs dinâmicas no Django, siga os passos abaixo:
 
-path('', views.home, name ="recipes-home"),
+1. **Definindo Nomes para as URLs** :
 
-path('recipes/`<int:id>`/', views.recipe, name = "recipes-recipe"),
+* Primeiramente, é necessário atribuir nomes às suas URLs no arquivo `urls.py`.
+* Por exemplo:
+  ```python
+  urlpatterns = [
+      path('', views.home, name="recipes-home"),
+      path('recipes/<int:id>/', views.recipe, name="recipes-recipe"),
+  ]
+  ```
 
-]
+1. **Usando os Nomes das URLs nos Templates** :
 
-apos declarar o nome das urls
+* No seu template HTML, utilize a tag `{% url 'nome_da_url' %}` para chamar a URL pelo nome.
+* Por exemplo, para criar um link para a página inicial:
+  ```html
+  <a href="{% url 'recipes-home' %}">Ir para a página inicial</a>
+  ```
 
-no template vc usar o link :
+1. **Passando Parâmetros** :
 
-<a href="{% url 'recipes-home'%}"
+* Caso a rota necessite de algum parâmetro, como um ID, você deve enviá-lo após o nome da rota.
+* Por exemplo, para a URL `recipes-recipe`, você pode usar:
+  ```html
+  <a href="{% url 'recipes-recipe' id=42 %}">Ver receita</a>
+  ```
 
-basicamente usando a tag url do django vc pode chamar a url pelo nome
+1. **Utilizando o `app_name`** :
 
-atencao caso a rota precise de algum parametro como id e etc e preciso enviar o parametro apos o nome da rota
+* É possível definir um `app_name` no arquivo `urls.py` do seu aplicativo.
+* Por exemplo:
+  ```python
+  app_name = 'exemplo'
 
-caso o contrario vai haver um erro
+  urlpatterns = [
+      path('', views.home, name="home"),
+      path('recipes/<int:id>/', views.recipe, name="recipe"),
+  ]
+  ```
+* Agora, na hora de chamar a URL, você pode usar:
+  ```html
+  <a href="{% url 'exemplo:home' %}">Ir para a página inicial</a>
+  ```
 
-tbm e possivel criar um app name  ex:
-
-app_name = 'exemplo'
-
-
-urlpatterns = [
-
-path('', views.home, name ="home"),
-
-path('recipes/`<int:id>`/', views.recipe, name = "recipe"),
-
-]
-
-agora na hora de chamar a url chama-se apenas exemplo:home ou exemplo:recipe
+Lembre-se de que os templates são poderosas ferramentas para criar interfaces interativas e personalizadas em suas aplicações Django. 🚀
