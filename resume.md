@@ -489,3 +489,53 @@ Para utilizar URLs dinâmicas no Django, siga os passos abaixo:
   ```
 
 Lembre-se de que os templates são poderosas ferramentas para criar interfaces interativas e personalizadas em suas aplicações Django. 🚀
+
+
+# Django models e ORM (Object Relational Mapper)
+
+um  model basicamente representa uma tabela na base de dados o django converte os models em tabelas na base de dados 
+
+vc cria seus models django no arquivo models.py dentro do app
+
+basicamente vc cria uma classe  ex:
+
+class Recipe(models.Model):
+
+
+ela precisa herdar as propriedades de models.Model
+
+a class basicamente e a tabela  e os  atributos da class sao as colunas ex:
+
+class Recipe(models.Model):
+
+    title = models.CharField(max_length=65) basicamente um camp de char ou texto na base de  																	dados com no max 65 caracteres
+
+    description= models.CharField(max_length=165)
+
+    slug = models.SlugField() basicamente um campo expecial feito pro slug
+
+    preparation_time = models.IntegerField()
+
+    preparation_time_unit = models.CharField(max_length=65)
+
+    serving_time = models.IntegerField()
+
+    serving_unit = models.CharField(max_length=65)
+
+    preparation_steps = models.TextField()
+
+    preparation_steps_is_html = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    no momento da criacao vai pegar a data atual pro created_at
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    quando for atualizado vai pegar a data
+
+    is_published = models.BooleanField(default=False)
+
+    cover = models.Ima geField(upload_to ='recipes/covers/%Y/%m/%d/')
+
+    esta falando onde vai ser armazenado e como vai ser nomeado o %Y quer dizer o ano/%m quer dizer o mes/%d quer dizer o dia
