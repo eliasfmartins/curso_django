@@ -439,7 +439,6 @@ Na sua template (`template.html`), você pode iterar sobre os exemplos usando o 
 
 Dessa forma, sua view renderizará o template com 10 exemplos de dados fictícios, que você pode usar para popular os cards no seu projeto Django. Lembre-se de adaptar os campos e as chaves do dicionário conforme necessário para o seu caso específico. 🚀
 
-
 ## URLs Dinâmicas no Django
 
 Para utilizar URLs dinâmicas no Django, siga os passos abaixo:
@@ -491,51 +490,31 @@ Para utilizar URLs dinâmicas no Django, siga os passos abaixo:
 Lembre-se de que os templates são poderosas ferramentas para criar interfaces interativas e personalizadas em suas aplicações Django. 🚀
 
 
-# Django models e ORM (Object Relational Mapper)
+Claro! Vou formatar o texto para você. Aqui está a versão organizada:
 
-um  model basicamente representa uma tabela na base de dados o django converte os models em tabelas na base de dados 
+# Django Models e ORM (Object Relational Mapper)
 
-vc cria seus models django no arquivo models.py dentro do app
+No Django, um **modelo** basicamente representa uma tabela no banco de dados. O Django converte esses modelos em tabelas na base de dados.
 
-basicamente vc cria uma classe  ex:
+Para criar seus modelos Django, você deve definir classes no arquivo `models.py` dentro do seu aplicativo (app).
 
-class Recipe(models.Model):
+Aqui está um exemplo de como criar um modelo:
 
-
-ela precisa herdar as propriedades de models.Model
-
-a class basicamente e a tabela  e os  atributos da class sao as colunas ex:
+```python
+from django.db import models
 
 class Recipe(models.Model):
-
-    title = models.CharField(max_length=65) basicamente um camp de char ou texto na base de  																	dados com no max 65 caracteres
-
-    description= models.CharField(max_length=165)
-
-    slug = models.SlugField() basicamente um campo expecial feito pro slug
-
+    title = models.CharField(max_length=65)  # Campo de texto com no máximo 65 caracteres
+    description = models.CharField(max_length=165)
+    slug = models.SlugField()  # Campo especial para slugs
     preparation_time = models.IntegerField()
-
     preparation_time_unit = models.CharField(max_length=65)
-
     serving_time = models.IntegerField()
-
     serving_unit = models.CharField(max_length=65)
-
     preparation_steps = models.TextField()
-
     preparation_steps_is_html = models.BooleanField(default=False)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    no momento da criacao vai pegar a data atual pro created_at
-
-    updated_at = models.DateTimeField(auto_now=True)
-
-    quando for atualizado vai pegar a data
-
+    created_at = models.DateTimeField(auto_now_add=True)  # Data atual na criação
+    updated_at = models.DateTimeField(auto_now=True)  # Data na atualização
     is_published = models.BooleanField(default=False)
-
-    cover = models.Ima geField(upload_to ='recipes/covers/%Y/%m/%d/')
-
-    esta falando onde vai ser armazenado e como vai ser nomeado o %Y quer dizer o ano/%m quer dizer o mes/%d quer dizer o dia
+    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')  # Local e formato do nome do arquivo
+```
