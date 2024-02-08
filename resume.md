@@ -500,21 +500,32 @@ Para criar seus modelos Django, você deve definir classes no arquivo `models.py
 
 Aqui está um exemplo de como criar um modelo:
 
+
 ```python
 from django.db import models
 
 class Recipe(models.Model):
     title = models.CharField(max_length=65)  # Campo de texto com no máximo 65 caracteres
     description = models.CharField(max_length=165)
-    slug = models.SlugField()  # Campo especial para slugs
-    preparation_time = models.IntegerField()
-    preparation_time_unit = models.CharField(max_length=65)
-    serving_time = models.IntegerField()
-    serving_unit = models.CharField(max_length=65)
-    preparation_steps = models.TextField()
-    preparation_steps_is_html = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)  # Data atual na criação
-    updated_at = models.DateTimeField(auto_now=True)  # Data na atualização
-    is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')  # Local e formato do nome do arquivo
+    slug = models.SlugField()  # Campo especial para slugs (URLs amigáveis)
+    preparation_time = models.IntegerField()  # Tempo de preparo em minutos (número inteiro)
+    preparation_time_unit = models.CharField(max_length=65)  # Unidade de tempo (por exemplo, "minutos")
+    serving_time = models.IntegerField()  # Tempo de servir em minutos (número inteiro)
+    serving_unit = models.CharField(max_length=65)  # Unidade de tempo para servir (por exemplo, "minutos")
+    preparation_steps = models.TextField()  # Passos de preparo (texto longo)
+    preparation_steps_is_html = models.BooleanField(default=False)  # Indica se os passos de preparo contêm HTML
+    created_at = models.DateTimeField(auto_now_add=True)  # Data e hora de criação (automática)
+    updated_at = models.DateTimeField(auto_now=True)  # Data e hora de atualização (automática)
+    is_published = models.BooleanField(default=False)  # Indica se a receita está publicada
+    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')  # Imagem de capa (local e formato do nome do arquivo)
 ```
+
+Aqui estão os detalhes:
+
+* `CharField`: Armazena texto com um limite de caracteres.
+* `SlugField`: Usado para criar URLs amigáveis (slugs) a partir do título.
+* `IntegerField`: Armazena números inteiros (como tempos de preparo e servir).
+* `TextField`: Armazena texto longo (como os passos de preparo).
+* `BooleanField`: Armazena valores verdadeiro/falso (como a publicação da receita).
+* `DateTimeField`: Armazena data e hora (criação e atualização).
+* `ImageField`: Armazena imagens de capa, com local e formato personalizados.
