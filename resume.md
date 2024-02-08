@@ -384,7 +384,6 @@ Para criar um título dinâmico nos templates do Django, siga estas etapas:
 
 Dessa forma, você pode criar títulos dinâmicos para suas páginas usando blocos no Django. Lembre-se de substituir o valor padrão pelo título específico de cada página. 😊
 
-
 ## Populando templates utilizando func e for
 
 Primeiro, vamos configurar o **Faker** em seu projeto Django. Certifique-se de que você já instalou a biblioteca usando o comando:
@@ -439,3 +438,42 @@ Na sua template (`template.html`), você pode iterar sobre os exemplos usando o 
 ```
 
 Dessa forma, sua view renderizará o template com 10 exemplos de dados fictícios, que você pode usar para popular os cards no seu projeto Django. Lembre-se de adaptar os campos e as chaves do dicionário conforme necessário para o seu caso específico. 🚀
+
+## Url dinamicas
+
+para usar url dinamicas e preciso colocar primeiramente names  nas urls ex:
+
+urlpatterns = [
+
+path('', views.home, name ="recipes-home"),
+
+path('recipes/`<int:id>`/', views.recipe, name = "recipes-recipe"),
+
+]
+
+apos declarar o nome das urls
+
+no template vc usar o link :
+
+<a href="{% url 'recipes-home'%}"
+
+basicamente usando a tag url do django vc pode chamar a url pelo nome
+
+atencao caso a rota precise de algum parametro como id e etc e preciso enviar o parametro apos o nome da rota
+
+caso o contrario vai haver um erro
+
+tbm e possivel criar um app name  ex:
+
+app_name = 'exemplo'
+
+
+urlpatterns = [
+
+path('', views.home, name ="home"),
+
+path('recipes/`<int:id>`/', views.recipe, name = "recipe"),
+
+]
+
+agora na hora de chamar a url chama-se apenas exemplo:home ou exemplo:recipe
