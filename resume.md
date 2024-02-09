@@ -624,10 +624,9 @@ Quando você trabalha com o Django e cria ou altera modelos (models), é necess�
   ```
 * Agora, os dados na tabela serão mostrados pelos nomes em vez de “object” + ID.
 
+## Criando Outra Tabela
 
-
-criando outra tabela
-
+Você já está no caminho certo! A segunda forma de registrar sua tabela na área administrativa é usando o decorador `@admin.register`. Isso simplifica o processo e torna o código mais limpo. Aqui está o seu código atualizado:
 
 ```python
 from django.contrib import admin
@@ -643,40 +642,29 @@ class RecipeAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 ```
 
-essa e a segunda forma de publicar a sua tabela na area adm
+Agora, tanto `Category` quanto `Recipe` estarão disponíveis na área administrativa.
 
-### Alterando caminho das imagens salvas
+## Alterando o Caminho das Imagens Salvas
 
-mesmo com a configuracao  do campo cover as imagens estao sendo salvas dentro do app
+Você está certo sobre a necessidade de configurar o caminho para salvar as imagens em uma pasta `media`. Vamos fazer isso:
 
-para salvar as imagens dentro de uma pasta media na rais do projeto e preciso configurar o djando da seguinte forma
+1. Abra o arquivo `settings.py` do seu aplicativo.
+2. Próximo às configurações de `STATIC_ROOT`, adicione as configurações de `MEDIA`:
 
-na settins.py do app
-
-proximo as configuracoes de STATIC_ROOT
-
-adicionar configuracao de MEDIA
-
-MEDIA_URL= '/media/'
-
+```python
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+```
 
-a pasta onde sera salvo os arquivos enviados pelos usuarios
+3. Agora, o Django salvará as imagens enviadas pelos usuários na pasta `media` na raiz do seu projeto.
+4. No arquivo `urls.py` do seu aplicativo, adicione o seguinte:
 
-ainda assim quando vc cadastra uma imagem na parte adm do django ele disponibiliza um url pra vc poder acessala este nao estara funcionado  pois o django nao esta servindo esses arquivos
-
-para configurar isso vc vai na pasta urls.py do app
-
-vc faz uma concatenacao do seu urlpatterns ex:
-
-from django.conf.url.static import static
-
+```python
+from django.conf.urls.static import static
 from django.conf import settings
 
-obs: esse MEDIA_URL e o  aquivo que foi configurado anteriormente
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
 
-com essas configuracoes o django agora podera servir as imagens que ele recebeu dos ususarios
+Com essas configurações, o Django será capaz de servir as imagens que você recebeu dos usuários.
