@@ -567,3 +567,65 @@ Quando você trabalha com o Django e cria ou altera modelos (models), é necess�
 * Ele executa as migrações pendentes (ou seja, as alterações registradas nos arquivos de migração) no banco de dados.
 * Isso significa que as tabelas são criadas, modificadas ou excluídas conforme necessário.
 * Por exemplo, se você adicionou uma nova coluna, o `migrate` criará essa coluna na tabela correspondente no banco de dados.
+
+## Area administrativa Django
+
+127.0.0.1:8000/admin
+
+nesse endereco vc entra na area administrativa do django
+
+necessitando de um usuario e password
+
+para criar um superUsuario usa-se o comando
+
+python manage.py createsuperuser
+
+vc usa o username , um email e um password
+
+que sera usado pra fazer login pela roda do admin
+
+apos fazer login na area adm vc vai poder ver 2 tabelas por padrao
+
+groups e users  no caso vc pode dar permisoes a um grupo de usres e cadastrar novos usuarios 
+
+## Exibindo tabelhas criadas na area adm
+
+para exibir as tabelas que vc criou e preciso ir no app/ admin.py
+
+e fazer configuracoes para as tabelas ficarem disponioveis na area adm
+
+primeira coisa criar uma class para a area adm do site
+
+que precisa herdar admin.ModelAdmin
+
+ex :
+
+from django.contrib import admin
+
+from .models import  Category
+
+class CategoryAdmin(admin.ModelAdmin):
+
+    ...
+
+admin.site.register(Category, CategoryAdmin)
+
+aqui eu passei o class da model category e a class CategoryAdmin apenas de fazer isso ja fica disponivel na area adm
+
+na area adm mesmo que vc crie itens na tabela seram exibidos "nome da class" object(numero id)
+
+para exibir- los pelo nome e preciso fazer algumas alterações 
+
+em model.py
+
+na sua class Category(models.Model):
+
+    name = models.CharField(max_length=65)
+
+adiiciona um metodo 
+
+def__str __(self):
+
+    return self.name
+
+dessa forma os dados  que vc vera na tabela  serao os nomes ao invez de object e o id
