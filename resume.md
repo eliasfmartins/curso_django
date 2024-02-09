@@ -538,15 +538,32 @@ from django.contrib.auth.models impor User esse user e um model
 * `ForeignKey`: Cria uma relação entre tabelas (no caso, com as tabelas `Category` e `User`).
 * `User`: O modelo padrão do Django para gerenciar usuários.
 
-quando se trabalha com imagems no django e preciso utilizar o pillow  vai gerar um erro na parte do campo de ImageFIeld se o mesmo nao estiver instalado pois e um campo de imagem sendo necessario instalar o pillow
+## Pillow e campos de imagem:
 
-apos fazer a tabela e as colunas no models e preciso fazer o migrationse  e make migrations
+* O **Pillow** é uma biblioteca Python para processamento de imagens.
+* Quando você usa o campo `ImageField` no Django (para armazenar imagens), o Pillow é necessário.
+* Se o Pillow não estiver instalado, você receberá um erro ao executar as migrações.
+* Para instalar o Pillow, você pode usar o seguinte comando:
+  ```
+  pip install pillow
+  ```
 
+Lembre-se de sempre rodar `makemigrations` após fazer alterações nos modelos e, em seguida, aplicar essas mudanças com `migrate`. Isso garante que seu banco de dados esteja sempre atualizado com a estrutura dos modelos.
 
-python manage.py make migrations
+## Migrations no Django: makemigrations e migrate
 
- e usado toda vez que vc faz alteracoes em uma tabelha ou model criando um arquivo falando as alteracoes que foram feitas
+Quando você trabalha com o Django e cria ou altera modelos (models), é necessário aplicar essas mudanças ao banco de dados. Para isso, utilizamos os comandos `makemigrations` e `migrate`.
 
-python manage.py migrate
+1. **`makemigrations`** :
 
-o migrate e usado pra aplicar essas mudancas que foram registradas no arquivo diretamente  no banco de daos
+* O comando `makemigrations` é usado **sempre que você faz alterações em um modelo** (adiciona, remove ou modifica campos).
+* Ele cria um arquivo de migração que descreve as alterações feitas no modelo.
+* Esse arquivo é salvo na pasta `migrations` dentro do seu aplicativo (app).
+* Por exemplo, se você adicionou uma nova coluna à sua tabela, o `makemigrations` criará um arquivo que registra essa alteração.
+
+1. **`migrate`** :
+
+* O comando `migrate` é usado para  **aplicar essas mudanças diretamente ao banco de dados** .
+* Ele executa as migrações pendentes (ou seja, as alterações registradas nos arquivos de migração) no banco de dados.
+* Isso significa que as tabelas são criadas, modificadas ou excluídas conforme necessário.
+* Por exemplo, se você adicionou uma nova coluna, o `migrate` criará essa coluna na tabela correspondente no banco de dados.
