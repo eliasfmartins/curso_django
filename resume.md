@@ -668,3 +668,64 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 
 Com essas configurações, o Django será capaz de servir as imagens que você recebeu dos usuários.
+
+# Resumo da API de QuerySets do Django
+
+## O que é um QuerySet?
+
+* Um **QuerySet** é uma abstração do Django que representa uma consulta ao banco de dados.
+* Ele permite que você manipule dados de forma orientada a objetos, sem precisar escrever SQL diretamente.
+
+## Principais Métodos de QuerySet:
+
+1. **`filter(**kwargs)`** :
+
+* Filtra os resultados com base em condições especificadas.
+* Exemplo: `Entry.objects.filter(pub_date__year=2023)`
+
+1. **`exclude(**kwargs)`** :
+
+* Exclui resultados com base em condições.
+* Exemplo: `Entry.objects.exclude(author__name='John')`
+
+1. **`get(**kwargs)`** :
+
+* Retorna um único objeto que atende às condições.
+* Exemplo: `Entry.objects.get(id=1)`
+
+1. **`all()`** :
+
+* Retorna todos os objetos do modelo.
+* Exemplo: `Entry.objects.all()`
+
+1. **`order_by(*fields)`** :
+
+* Ordena os resultados com base em campos especificados.
+* Exemplo: `Entry.objects.order_by('-pub_date')`
+
+1. **`values(*fields)`** :
+
+* Retorna um dicionário para cada objeto com valores dos campos especificados.
+* Exemplo: `Entry.objects.values('title', 'author')`
+
+1. **`annotate(*args, **kwargs)`** :
+
+* Adiciona campos calculados aos resultados.
+* Exemplo: `Entry.objects.annotate(comment_count=Count('comments'))`
+
+1. **`count()`** :
+
+* Retorna o número de objetos no QuerySet.
+* Exemplo: `Entry.objects.count()`
+
+1. **`exists()`** :
+
+* Verifica se há pelo menos um resultado.
+* Exemplo: `Entry.objects.filter(pub_date__year=2023).exists()`
+
+1. **`distinct()`** :
+
+* Remove duplicatas dos resultados.
+* Exemplo: `Entry.objects.values('author').distinct()`
+
+esses são apenas algums methodos pra mais informações procure a documentação da API
