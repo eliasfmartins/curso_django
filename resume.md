@@ -568,64 +568,58 @@ Quando você trabalha com o Django e cria ou altera modelos (models), é necess�
 * Isso significa que as tabelas são criadas, modificadas ou excluídas conforme necessário.
 * Por exemplo, se você adicionou uma nova coluna, o `migrate` criará essa coluna na tabela correspondente no banco de dados.
 
-## Area administrativa Django
+### Área Administrativa do Django
 
-127.0.0.1:8000/admin
+1. **Acessando a Área Administrativa** :
 
-nesse endereco vc entra na area administrativa do django
+* Acesse o endereço `127.0.0.1:8000/admin` no seu navegador.
+* Você precisará fazer login com um usuário e senha.
 
-necessitando de um usuario e password
+1. **Criando um Superusuário** :
 
-para criar um superUsuario usa-se o comando
+* Para criar um superusuário, execute o seguinte comando no terminal:
+  ```
+  python manage.py createsuperuser
+  ```
+* Informe um nome de usuário, um email e uma senha.
+* Esse superusuário será usado para fazer login na área administrativa.
 
-python manage.py createsuperuser
+1. **Tabelas Padrão** :
 
-vc usa o username , um email e um password
+* Após fazer login, você verá duas tabelas padrão: `Groups` e `Users`.
+* Você pode dar permissões a grupos de usuários e cadastrar novos usuários por meio dessas tabelas.
 
-que sera usado pra fazer login pela roda do admin
+### Exibindo Tabelas Criadas na Área Administrativa
 
-apos fazer login na area adm vc vai poder ver 2 tabelas por padrao
+1. **Configuração no `admin.py`** :
 
-groups e users  no caso vc pode dar permisoes a um grupo de usres e cadastrar novos usuarios 
+* Para exibir as tabelas que você criou na área administrativa, vá para o arquivo `admin.py` do seu aplicativo.
+* Crie uma classe para cada modelo (tabela) que deseja disponibilizar na área administrativa.
+* Essa classe deve herdar de `admin.ModelAdmin`.
+* Por exemplo, se você tem um modelo chamado `Category`, crie uma classe `CategoryAdmin`.
 
-## Exibindo tabelhas criadas na area adm
+1. **Registro do Modelo** :
 
-para exibir as tabelas que vc criou e preciso ir no app/ admin.py
+* No mesmo arquivo `admin.py`, registre o modelo com a classe administrativa:
+  ```python
+  from django.contrib import admin
+  from .models import Category
 
-e fazer configuracoes para as tabelas ficarem disponioveis na area adm
+  class CategoryAdmin(admin.ModelAdmin):
+      # Configurações adicionais, se necessário
 
-primeira coisa criar uma class para a area adm do site
+  admin.site.register(Category, CategoryAdmin)
+  ```
 
-que precisa herdar admin.ModelAdmin
+1. **Personalizando a Exibição** :
 
-ex :
+* Por padrão, os itens na tabela serão exibidos como “Nome da Classe” + “object” (número de ID).
+* Para exibir os nomes dos itens, adicione um método `__str__` ao seu modelo (em `models.py`):
+  ```python
+  class Category(models.Model):
+      name = models.CharField(max_length=65)
 
-from django.contrib import admin
-
-from .models import  Category
-
-class CategoryAdmin(admin.ModelAdmin):
-
-    ...
-
-admin.site.register(Category, CategoryAdmin)
-
-aqui eu passei o class da model category e a class CategoryAdmin apenas de fazer isso ja fica disponivel na area adm
-
-na area adm mesmo que vc crie itens na tabela seram exibidos "nome da class" object(numero id)
-
-para exibir- los pelo nome e preciso fazer algumas alterações 
-
-em model.py
-
-na sua class Category(models.Model):
-
-    name = models.CharField(max_length=65)
-
-adiiciona um metodo 
-
-def__str __(self):
-
-    return self.name
-
-dessa forma os dados  que vc vera na tabela  serao os nomes ao invez de object e o id
+      def __str__(self):
+          return self.name
+  ```
+* Agora, os dados na tabela serão mostrados pelos nomes em vez de “object” + ID.
