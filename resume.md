@@ -729,3 +729,26 @@ Com essas configurações, o Django será capaz de servir as imagens que você r
 * Exemplo: `Entry.objects.values('author').distinct()`
 
 esses são apenas algums methodos pra mais informações procure a documentação da API
+
+
+## Usando dados das Models nos templates
+
+
+```python
+from django. shortcuts import render
+from utils.recipes.factory import make_recipe
+from recipes.models import Recipe
+
+def home(request):
+	recipes = Recipe.objects.all().order_by('-id)
+	pega todas as receitas do bd e ordena decrecente
+	return (request, 'recipes/pages/home.html', context={
+	'recipes': recipes,
+	#cria uma chave recipes que recebe todas as receitas do banco de dados
+})
+def category(request, category_id):
+	recipes = Recipes.objects.filter(category__id=category_id)
+	atravez de recipe q esta ligado a outra tabela no caso category eu consigo consultar os dados 		de um campo especifico no caso o id utilizando a tabela que no caso e category __ e o id fazendo o filtro na categoria que  tenha esse id
+
+
+```
