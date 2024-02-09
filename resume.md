@@ -623,3 +623,60 @@ Quando você trabalha com o Django e cria ou altera modelos (models), é necess�
           return self.name
   ```
 * Agora, os dados na tabela serão mostrados pelos nomes em vez de “object” + ID.
+
+
+
+criando outra tabela
+
+
+```python
+from django.contrib import admin
+from .models import Category, Recipe
+
+class CategoryAdmin(admin.ModelAdmin):
+    # Configurações adicionais, se necessário
+
+@admin.register(Recipe)
+class RecipeAdmin(admin.ModelAdmin):
+    # Configurações adicionais, se necessário
+
+admin.site.register(Category, CategoryAdmin)
+```
+
+essa e a segunda forma de publicar a sua tabela na area adm
+
+### Alterando caminho das imagens salvas
+
+mesmo com a configuracao  do campo cover as imagens estao sendo salvas dentro do app
+
+para salvar as imagens dentro de uma pasta media na rais do projeto e preciso configurar o djando da seguinte forma
+
+na settins.py do app
+
+proximo as configuracoes de STATIC_ROOT
+
+adicionar configuracao de MEDIA
+
+MEDIA_URL= '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+a pasta onde sera salvo os arquivos enviados pelos usuarios
+
+ainda assim quando vc cadastra uma imagem na parte adm do django ele disponibiliza um url pra vc poder acessala este nao estara funcionado  pois o django nao esta servindo esses arquivos
+
+para configurar isso vc vai na pasta urls.py do app
+
+vc faz uma concatenacao do seu urlpatterns ex:
+
+from django.conf.url.static import static
+
+from django.conf import settings
+
+obs: esse MEDIA_URL e o  aquivo que foi configurado anteriormente
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+com essas configuracoes o django agora podera servir as imagens que ele recebeu dos ususarios
