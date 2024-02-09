@@ -730,25 +730,58 @@ Com essas configurações, o Django será capaz de servir as imagens que você r
 
 esses são apenas algums methodos pra mais informações procure a documentação da API
 
+## Usando Dados das Models nos Templates
 
-## Usando dados das Models nos templates
+1. **Recuperando Dados no View (Views)** :
 
+* No seu exemplo, você está recuperando todas as receitas do banco de dados usando `Recipe.objects.all().order_by('-id')`.
+* Isso cria um QuerySet (conjunto de resultados) contendo todas as instâncias do modelo `Recipe`.
+* O método `order_by('-id')` ordena as receitas pelo campo `id` em ordem decrescente.
+
+1. **Passando Dados para o Template** :
+
+* Você está passando o QuerySet de receitas para o template usando o contexto.
+* O contexto é um dicionário que contém variáveis que você deseja acessar no template.
+* No seu caso, você criou uma chave chamada `'recipes'` no contexto que contém todas as receitas.
+
+1. **Acessando Dados no Template** :
+
+* No seu template (`recipes/pages/home.html`), você pode acessar as receitas usando a variável `recipes`.
+* Por exemplo, para listar todas as receitas, você pode fazer o seguinte:
+  ```html
+  {% for recipe in recipes %}
+      <p>{{ recipe.title }}</p>
+  {% endfor %}
+  ```
+* Isso itera sobre todas as receitas no QuerySet e exibe o título de cada uma.
+
+1. **Filtrando por Categoria** :
+
+* No segundo exemplo, você está filtrando as receitas com base no `category_id`.
+* Isso é feito usando `Recipes.objects.filter(category__id=category_id)`.
+* O duplo underscore (`__`) é usado para acessar campos relacionados (no caso, a categoria).
+
+Lembre-se de que o template é onde você exibe os dados recuperados no view. Use as variáveis do contexto para acessar esses dados no template.
+
+
+Claro! Vou incluir o bloco de código com comentários explicativos para cada parte. Aqui está:
 
 ```python
-from django. shortcuts import render
+from django.shortcuts import render
 from utils.recipes.factory import make_recipe
 from recipes.models import Recipe
 
 def home(request):
-	recipes = Recipe.objects.all().order_by('-id)
-	pega todas as receitas do bd e ordena decrecente
-	return (request, 'recipes/pages/home.html', context={
-	'recipes': recipes,
-	#cria uma chave recipes que recebe todas as receitas do banco de dados
-})
+    # Recupera todas as receitas do banco de dados e ordena pelo ID (decrescente)
+    recipes = Recipe.objects.all().order_by('-id')
+    # Cria uma chave 'recipes' no contexto para disponibilizar as receitas no template
+    return render(request, 'recipes/pages/home.html', context={'recipes': recipes})
+
 def category(request, category_id):
-	recipes = Recipes.objects.filter(category__id=category_id)
-	atravez de recipe q esta ligado a outra tabela no caso category eu consigo consultar os dados 		de um campo especifico no caso o id utilizando a tabela que no caso e category __ e o id fazendo o filtro na categoria que  tenha esse id
-
-
+    # Filtra as receitas com base no ID da categoria
+    recipes = Recipe.objects.filter(category__id=category_id)
+    # Através do relacionamento com a tabela 'category', consulta os dados da categoria
+    # usando o campo 'id'
+    # ...
+    # (continue com o restante do código)
 ```
