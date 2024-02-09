@@ -489,7 +489,6 @@ Para utilizar URLs dinâmicas no Django, siga os passos abaixo:
 
 Lembre-se de que os templates são poderosas ferramentas para criar interfaces interativas e personalizadas em suas aplicações Django. 🚀
 
-
 Claro! Vou formatar o texto para você. Aqui está a versão organizada:
 
 # Django Models e ORM (Object Relational Mapper)
@@ -500,13 +499,16 @@ Para criar seus modelos Django, você deve definir classes no arquivo `models.py
 
 Aqui está um exemplo de como criar um modelo:
 
-
 ```python
 from django.db import models
+from django.contrib.auth.models import User  # Importando o modelo User pra usar como tabela
+
+class Category(models.Model):
+    name = models.CharField(max_length=65)  # Nome da categoria
 
 class Recipe(models.Model):
-    title = models.CharField(max_length=65)  # Campo de texto com no máximo 65 caracteres
-    description = models.CharField(max_length=165)
+    title = models.CharField(max_length=65)  # Título da receita (campo de texto com no máximo 65 caracteres)
+    description = models.CharField(max_length=165)  # Descrição da receita
     slug = models.SlugField()  # Campo especial para slugs (URLs amigáveis)
     preparation_time = models.IntegerField()  # Tempo de preparo em minutos (número inteiro)
     preparation_time_unit = models.CharField(max_length=65)  # Unidade de tempo (por exemplo, "minutos")
@@ -518,9 +520,13 @@ class Recipe(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # Data e hora de atualização (automática)
     is_published = models.BooleanField(default=False)  # Indica se a receita está publicada
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')  # Imagem de capa (local e formato do nome do arquivo)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)  # Relação com a tabela Category
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # Relação com a tabela User
 ```
 
-Aqui estão os detalhes:
+usando o aultor do proprio django ao invez de criar uma tabelha pros  autores importa se
+
+from django.contrib.auth.models impor User esse user e um model
 
 * `CharField`: Armazena texto com um limite de caracteres.
 * `SlugField`: Usado para criar URLs amigáveis (slugs) a partir do título.
@@ -529,3 +535,18 @@ Aqui estão os detalhes:
 * `BooleanField`: Armazena valores verdadeiro/falso (como a publicação da receita).
 * `DateTimeField`: Armazena data e hora (criação e atualização).
 * `ImageField`: Armazena imagens de capa, com local e formato personalizados.
+* `ForeignKey`: Cria uma relação entre tabelas (no caso, com as tabelas `Category` e `User`).
+* `User`: O modelo padrão do Django para gerenciar usuários.
+
+quando se trabalha com imagems no django e preciso utilizar o pillow  vai gerar um erro na parte do campo de ImageFIeld se o mesmo nao estiver instalado pois e um campo de imagem sendo necessario instalar o pillow
+
+apos fazer a tabela e as colunas no models e preciso fazer o migrationse  e make migrations
+
+
+python manage.py make migrations
+
+ e usado toda vez que vc faz alteracoes em uma tabelha ou model criando um arquivo falando as alteracoes que foram feitas
+
+python manage.py migrate
+
+o migrate e usado pra aplicar essas mudancas que foram registradas no arquivo diretamente  no banco de daos
