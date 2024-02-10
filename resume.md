@@ -785,15 +785,20 @@ def category(request, category_id):
     # (continue com o restante do código)
 ```
 
+## Criando Usuários no Django
 
-## Criando usuarios no Django
+Primeiramente, é aconselhável abrir o **shell do Django** com o seguinte comando:
 
-primeiramente e aconselhavel abrir o  shell do django com comando a seguir
-
+```bash
 python manage.py shell
+```
 
-apos o terminal do shell ser aberto fazer o import 
+Após o terminal do shell ser aberto, faça o import do módulo `User`:
 
+```python
 from django.contrib.auth.models import User
 
 User.objects.create_user(first_name='Andre', last_name='Gontigio', username='AG', email='', password='12345')
+```
+
+Agora você pode criar usuários no Django usando o método `create_user`.
