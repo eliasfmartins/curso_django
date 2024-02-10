@@ -763,7 +763,6 @@ esses são apenas algums methodos pra mais informações procure a documentaçã
 
 Lembre-se de que o template é onde você exibe os dados recuperados no view. Use as variáveis do contexto para acessar esses dados no template.
 
-
 Claro! Vou incluir o bloco de código com comentários explicativos para cada parte. Aqui está:
 
 ```python
@@ -785,3 +784,16 @@ def category(request, category_id):
     # ...
     # (continue com o restante do código)
 ```
+
+
+## Criando usuarios no Django
+
+primeiramente e aconselhavel abrir o  shell do django com comando a seguir
+
+python manage.py shell
+
+apos o terminal do shell ser aberto fazer o import 
+
+from django.contrib.auth.models import User
+
+User.objects.create_user(first_name='Andre', last_name='Gontigio', username='AG', email='', password='12345')
